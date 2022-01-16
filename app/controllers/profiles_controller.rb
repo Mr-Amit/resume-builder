@@ -5,6 +5,14 @@ class ProfilesController < ApplicationController
     before_action :logged_in_user, only: [:update]
     before_action :correct_user,   only: [:update]
 
+    def create
+        @profile = Profile.new(profile_params)
+        if @profile.save
+        else
+            render 'new'
+        end
+    end
+
     def update
         updated_profile_params = update_array_attributes_in_params(profile_params)
         @profile = Profile.find(params[:id])
@@ -27,7 +35,8 @@ class ProfilesController < ApplicationController
         def profile_params
             params.require(:profile).permit(:name, :job_title, :total_experience, :overview, 
                 :career_highlights, :primary_skills, :secondary_skills,
-                :educations_attributes => [ :id, :school, :degree, :description, :start, :end, :_destroy]
+                :educations_attributes => [ :id, :school, :degree, :description, :start, :end, :_destroy],
+                :experiences_attributes => [:id, :company, :position, :start_date, :end_date, :description, :_destroy, {:projects_attributes=> %i[id title url tech_stack description _destroy]}]
             )
         end
 end

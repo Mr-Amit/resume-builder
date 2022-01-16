@@ -1,0 +1,13 @@
+<%= render 'shared/edit_sub_section' do %>
+    <%= experience.text_field :company, value: experience.object.company, placeholder: "Company" %><br/>
+
+    <%= experience.text_field :position, value: experience.object.position, placeholder: "Position" %><br/>
+
+    <%= experience.date_field :start_date, value: experience.object.start_date, placeholder: "Start date" %><br/>
+
+    <%= experience.date_field :end_date, value: experience.object.end_date, placeholder: "End date" %><br/>
+
+    <%= experience.text_area :description, value: experience.object.description, placeholder: "Description" %><br/>
+    
+    <%= render 'shared/input/buttons/delete', type: experience %>
+<% end %>

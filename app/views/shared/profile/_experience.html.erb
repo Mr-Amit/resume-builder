@@ -1,0 +1,10 @@
+<div class="mt-8 text-gray-500">
+    <%= render 'shared/profile/item_with_description', 
+        title: experience.company,
+        subtitle: experience.position,
+        start_date: experience.start_date,
+        end_date: experience.end_date,
+        description: experience.description
+    %>
+    <%= render partial: 'shared/profile/project', collection: experience.projects %>
+</div>

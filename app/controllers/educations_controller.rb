@@ -6,5 +6,8 @@ class EducationsController < ApplicationController
         flash[:success] = "Education added."
         redirect_to edit_url
     end
-
+    
+    def destroy
+        education.destroy
+    end
 end
