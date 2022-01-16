@@ -1,12 +1,14 @@
 class ProfilesController < ApplicationController
     include HomeHelper
     include ProfilesHelper
+    # include SessionsHelper
 
-    before_action :logged_in_user, only: [:update]
-    before_action :correct_user,   only: [:update]
-
+    before_action :logged_in_user, only: [:update, :edit, :preview]
+    before_action :correct_user,   only: [:update, :edit]
+    
+    
     def create
-        puts profile_params
+        # puts profile_params
         @profile = Profile.new(profile_params)
         if @profile.save
         else
@@ -32,10 +34,17 @@ class ProfilesController < ApplicationController
         redirect_to(root_url) unless @user == current_user
     end
     
-    def show
-        @profile = Profile.find_by_id(params[:id])
-        render :template => "shared/profile/profile_preview" , locals: { profile: @profile}
-    end
+    
+    # def show
+    #     # if logged_in?
+    #     #     @profile
+    #     # else
+    #     #     @profile = Profile.find_by_id(params[:id])
+    #     # end
+    #     # @profile = Profile.first
+        
+    #     # render :template => "shared/profile/profile_preview" , locals: { profile: @profile}
+    # end
 
     def preview
         render :template => "shared/profile/profile_preview" , locals: { profile: current_user.profile}
