@@ -1,4 +1,5 @@
 class Profile < ApplicationRecord
+    has_one_attached :image, :dependent => :destroy
     has_many(:educations, dependent: :destroy)
     accepts_nested_attributes_for(:educations , reject_if: :reject_education_create, allow_destroy: true)
     has_many(:experiences, dependent: :destroy)

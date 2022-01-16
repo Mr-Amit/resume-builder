@@ -4,16 +4,22 @@
     <%= form_for(@profile, builder: TailwindInputBuilder) do |f| %>
         <div class="flex justify-end items-center w-full mb-4">
             <div>
+                <%= render 'shared/input/buttons/primary', color: "purple", label: "Preview", href: preview_url, target: "_blank" %>
                 <%= f.submit "Save", class: "flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-green-200" %><br/>
             </div>
         </div>
 
         <%= render 'shared/edit_section', title: "Profile details" do %>
             <%= f.text_field :name, value: @profile.name || current_user.name, placeholder: "Name" %><br/>
-            <div class="flex items-center my-4">
-                <%= image_tag gravatar_url_for(current_user), 
-                    id: "image-preview", style:"max-width:200px"
-                %>
+            <div class="form-group">
+                <div style="width: 100%">
+                    <% if @profile.image.attached? %>
+                        <%= image_tag @profile.image, style: "display: block; width: 16em; height: 16em; border-radius: 10%" %>
+                    <% end %>
+                </div>
+                <% f.label :image %>
+                <%= f.file_field :image, class: "form-control" %>
+                
             </div>
             <%= f.text_field :job_title, value: @profile.job_title, placeholder: "Job title" %><br/>
             <%= f.text_field :total_experience, value: @profile.total_experience, placeholder: "Total experience" %><br/>
