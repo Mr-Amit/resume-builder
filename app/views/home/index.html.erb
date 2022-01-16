@@ -5,7 +5,26 @@
         <h1 class="text-3xl"> 
             Welcome, <span class="text-purple-600 font-semibold"><%= @user.name %><span>
         </h1>
+        
         <div>
+            <script>
+                function getUrl(){
+                    
+                    var link = window.location.href + 'show/' + <%= @user.profile.id %>
+                    if (navigator.clipboard && window.isSecureContext) {
+                        document.getElementById("copy_button").innerHTML = "Copied!"
+                        return navigator.clipboard.writeText(link);
+                    }
+                    else{
+                        // If the clipboard isn't available
+                        window.open(link)
+                    }
+                }
+            </script>
+            <button id="copy_button" onclick="getUrl()" 
+                class="py-2 px-4 border-2 border-purple-600 text-purple-600 hover:border-purple-700 hover:text-purple-700 
+                text-center text-base font-semibold shadow-md hover:shadow-none focus:outline-none rounded-lg">
+                Copy</button>
             <%= render 'shared/input/buttons/primary', color: "purple", label: "Preview", href: preview_url %>
             <%= render 'shared/input/buttons/secondary', color: "purple", label: "Edit", href: edit_url %>
         </div>

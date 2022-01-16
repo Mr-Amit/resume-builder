@@ -34,17 +34,26 @@ class ProfilesController < ApplicationController
         redirect_to(root_url) unless @user == current_user
     end
     
-    
-    # def show
-    #     # if logged_in?
-    #     #     @profile
-    #     # else
-    #     #     @profile = Profile.find_by_id(params[:id])
-    #     # end
-    #     # @profile = Profile.first
-        
-    #     # render :template => "shared/profile/profile_preview" , locals: { profile: @profile}
+    # def correct_user
+    #     if current_user.id != :user_id
+    #         redirect_to(root_url)
+    #     end
     # end
+    
+    def show
+        if Profile.where(id: params[:id]).empty? 
+            flash[:danger] = "Profile does not exist."
+            if logged_in?
+                redirect_to root_url
+            else
+                redirect_to(login_url)
+            end
+        else
+            @profile = Profile.find(params[:id])
+        
+            render :template => "shared/profile/profile_preview" , locals: { profile: @profile}
+        end
+    end
 
     def preview
         render :template => "shared/profile/profile_preview" , locals: { profile: current_user.profile}

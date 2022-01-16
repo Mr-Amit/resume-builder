@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   get    'signup'  => 'users#new'
   get    'preview' => 'profiles#preview'
-  
+  get    'show/:id'=> 'profiles#show'
   resources :users
   resources :experiences
   resources :projects 
