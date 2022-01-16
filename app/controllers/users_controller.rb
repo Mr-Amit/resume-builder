@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       Profile.create(user: @user)
       log_in(@user)
-      redirect_to(root_path)
+      redirect_to(edit_url)
     else
       render 'new'
     end

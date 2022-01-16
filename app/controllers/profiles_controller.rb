@@ -50,12 +50,20 @@ class ProfilesController < ApplicationController
             end
         else
             @profile = Profile.find(params[:id])
+            if @profile.name.nil?
+                @user = User.find(@profile.user_id)
+                @profile.name = @user.name
+            end
         
             render :template => "shared/profile/profile_preview" , locals: { profile: @profile}
         end
     end
 
     def preview
+        if current_user.profile.name.nil?
+            @user = User.find(current_user.profile.user_id)
+            current_user.profile.name = @user.name
+        end
         render :template => "shared/profile/profile_preview" , locals: { profile: current_user.profile}
     end
 
