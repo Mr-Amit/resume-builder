@@ -21,12 +21,14 @@
                     }
                 }
             </script>
-            <button id="copy_button" onclick="getUrl()" 
-                class="py-2 px-4 border-2 border-purple-600 text-purple-600 hover:border-purple-700 hover:text-purple-700 
-                text-center text-base font-semibold shadow-md hover:shadow-none focus:outline-none rounded-lg">
-                Copy</button>
-            <%= render 'shared/input/buttons/primary', color: "purple", label: "Preview", href: preview_url %>
-            <%= render 'shared/input/buttons/secondary', color: "purple", label: "Edit", href: edit_url %>
+            <div class="flex flex-col md:flex-row">
+                <button id="copy_button" onclick="getUrl()" 
+                    class="py-2 px-4 border-2 border-purple-600 text-purple-600 hover:border-purple-700 hover:text-purple-700 
+                    text-center text-base font-semibold shadow-md hover:shadow-none focus:outline-none rounded-lg">
+                    Copy</button>
+                <%= render 'shared/input/buttons/primary', color: "purple", label: "Preview", href: preview_url %>
+                <%= render 'shared/input/buttons/secondary', color: "purple", label: "Edit", href: edit_url %>
+            </div>
         </div>
     </div>
     
